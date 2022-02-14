@@ -37,7 +37,19 @@ var startQuiz = function() {
 // START TIME FUNCTION
 var startTimer = function() {
 
+    // target timer ( 0 ) to change
+    timerEl.textContent = timeChange;
+
+    var timeCount = setInterval(function() {
+        if(timeChange > 0) {
+            timeChange = -1;
+            //change html of timer (0)
+            timerEl.textContent = timeChange;
+        }
+    }, 1000)
+
 };
+console.log(startTimer)
 
 // SHOW QUESTION FUNCTION
 var showQuestions = function() {
