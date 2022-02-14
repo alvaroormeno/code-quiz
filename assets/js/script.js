@@ -19,20 +19,23 @@ var startBtn = document.querySelector("#start");
 var timerEl = document.querySelector("#timeCounter");
 var mainEl = document.querySelector("#mainSection");
 
+var timeChange = 100;
+
 
 // MAIN QUIZ FUNCTION
-var startQuiz = function() {
+// var startQuiz = function() {
 
-    //Call startTimer function
-    startTimer();
+//     //Call startTimer function
+//     startTimer();
 
-    // Erase Button from hero
-    startBtn.remove();
+//     // Erase Button from hero
+//     startBtn.remove();
 
-    // Call showQuestions Function
-    showQuestions();
+//     // Call showQuestions Function
+//     showQuestions();
 
-},
+// };
+
 
 // START TIME FUNCTION
 var startTimer = function() {
@@ -42,17 +45,20 @@ var startTimer = function() {
 
     var timeCount = setInterval(function() {
         if(timeChange > 0) {
-            timeChange = -1;
+            timeChange = timeChange -1;
             //change html of timer (0)
             timerEl.textContent = timeChange;
         }
     }, 1000)
+    console.log(timeChange)
+    console.log('hi');
 
 };
-console.log(startTimer)
+
 
 // SHOW QUESTION FUNCTION
-var showQuestions = function() {
+// var showQuestions = function() {
 
-};
+// };
 
+startBtn.addEventListener("click", startTimer );
