@@ -17,6 +17,7 @@ var mainQuestions = [
 
 var startBtn = document.querySelector("#start");
 var timerEl = document.querySelector("#timeCounter");
+var welcomeEl = document.querySelector("#welcome-view");
 var mainEl = document.querySelector("#mainSection");
 
 var timeChange = 100;
@@ -29,10 +30,10 @@ var startQuiz = function() {
     startTimer();
 
     // Erase Button from hero
-    startBtn.remove();
+    welcomeEl.remove();
 
     // Call showQuestions Function
-    showQuestions();
+    showQuestions(0);
 
 };
 
@@ -67,12 +68,21 @@ var showQuestions = function(questionNumber) {
     questionSection.id = "questionNumber";
     // give new appended <section> classes
     questionSection.className = "container"
+    // append html that includes question from mainQuestions variable
+    questionSection.innerHTML = "<h2>HELLO</h2>"
 
     // variable that creates <section> element to display answer buttons
     var answerSection = document.createElement("section");
     // append answerSection element to <main> element in html
     mainEl.appendChild(answerSection);
-    
+     // give new appended <section> an id
+    answerSection.id = "chooseAnswer"
+    // give new appended <section> classes
+    answerSection.className = "container"
+
+
+
+
 
 
 };
