@@ -110,6 +110,7 @@ var answerBtn = document.querySelector("#answer-button")
 var timerEl = document.querySelector("#timeCounter");
 var welcomeEl = document.querySelector("#welcome-view");
 var mainEl = document.querySelector("#mainSection");
+var correctWrong = document.querySelector("#correctWrong");
 
 var timeChange = 100;
 var userScore = 0;
@@ -171,6 +172,8 @@ var startTimer = function() {
             timeChange = timeChange -1;
             //change html of timer (0)
             timerEl.textContent = timeChange;
+        } else if (timeChange === 0) {
+            gameOver()
         }
     }, 1000)
     console.log(timeChange)
@@ -224,7 +227,7 @@ var showQuestions = function(questionNumber) {
 
     var answerDiv = document.createElement("div");
     divRowClassA.appendChild(answerDiv);
-    answerDiv.className = "col text-center";
+    answerDiv.className = "col answers-button d-flex flex-column align-items-center mt-4";
 
     // for (var i = 0; i < mainQuestions.length; i++) {
     //     var answerBtnEl = document.createElement("button");
@@ -242,7 +245,7 @@ var showQuestions = function(questionNumber) {
         //console.log(answer)
         var answerBtnEl = document.createElement("button")
         answerBtnEl.id = "answer-button"
-        answerBtnEl.className = "btn btn-primary"
+        answerBtnEl.className = "btn btn-primary m-2 w-25"
         answerBtnEl.textContent = answer
         answerBtnEl.setAttribute("onclick", "checkCorrect(" + questionNumber + ", '" + answer + "')" )
         answerBtnEl.setAttribute("correctAnswer", selectedQuestion.answer )
@@ -263,12 +266,12 @@ var checkCorrect = function(questionNumber, questionAnswer) {
 
     if(questionAnswer === mainQuestions[questionNumber].answer) {
         correctAnswer();
-        userScore = userScore + 1;
+        userScore = userScore + 10;
         console.log("CORRECT ANSWER")
         
     } 
     else {
-        //wrongAnswer();
+        wrongAnswer();
         timeChange = timeChange - 5;
         console.log("WRONG ANSWER");
         
@@ -280,11 +283,11 @@ var checkCorrect = function(questionNumber, questionAnswer) {
     } else {
         setTimeout(function() {
             pastQuestion.remove(); 
-        }, 200);
+        }, 1000);
         setTimeout(function() {
             //console.log(pastQuestion)
             showQuestions(ranNumOf());
-        }, 400);
+        }, 1500);
 
     }
 
@@ -385,8 +388,23 @@ function clearHighScore() {
 }
 
 var correctAnswer = function() {
+    let correct = document.createElement("h2");
+    correct.className = "title border-top w-50 d-flex justify-content-center";
+    correct.textContent = "Correct!";
+    correctWrong.appendChild(correct);
+    setTimeout(function() {
+        correct.remove();
+    }, 1100);
+}
 
-    
+var wrongAnswer = function() {
+    let wrong = document.createElement("h2");
+    wrong.className = "title border-top w-50 d-flex justify-content-center";
+    wrong.textContent = "Wrong Answer!";
+    correctWrong.appendChild(wrong);
+    setTimeout(function() {
+        wrong.remove();
+    }, 1100);
 }
 
 
