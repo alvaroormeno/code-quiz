@@ -113,6 +113,7 @@ var mainEl = document.querySelector("#mainSection");
 
 var timeChange = 100;
 var userScore = 0;
+var saveScore = [];
 
 
 let numbersArray = [1,2,3,4,5,6,7,8,9,10]
@@ -279,11 +280,11 @@ var checkCorrect = function(questionNumber, questionAnswer) {
     } else {
         setTimeout(function() {
             pastQuestion.remove(); 
-        }, 500);
+        }, 200);
         setTimeout(function() {
             //console.log(pastQuestion)
             showQuestions(ranNumOf());
-        }, 1000);
+        }, 400);
 
     }
 
@@ -294,7 +295,93 @@ var gameOver = function() {
     var toDelete = document.querySelector("#question-view")
     toDelete.remove();
 
+    var ganmeOverSection = document.createElement("section");
+    mainEl.appendChild(ganmeOverSection);
+    ganmeOverSection.id = "gameover-view";
+    ganmeOverSection.className = "container";
 
+    var gameOverRowClass = document.createElement("div");
+    gameOverRowClass.className = "row"
+    ganmeOverSection.appendChild(gameOverRowClass);
+
+    var doneDiv = document.createElement("div");
+    gameOverRowClass.appendChild(doneDiv);
+    doneDiv.className = "col text-center";
+
+    var allDone = document.createElement("h2");
+    allDone.className = ("text-decoration-underline")
+    allDone.textContent = "All Done!"
+    doneDiv.appendChild(allDone);
+
+    var finalScore = document.createElement("p");
+    finalScore.id = ("score")
+    finalScore.textContent = "Your final score is " + userScore;
+    doneDiv.appendChild(finalScore);
+
+    var inputDoneDiv = document.createElement("div");
+    gameOverRowClass.appendChild(inputDoneDiv);
+    inputDoneDiv.className = "text-center";
+
+    var nameInput = document.createElement("input");
+    nameInput.placeholder = "Enter initials";
+    nameInput.id = ("name-initials");
+    nameInput.type = ("text");
+    inputDoneDiv.appendChild(nameInput);
+
+    let submitButton = document.createElement("button");
+    submitButton.className = ("btn m-5");
+    submitButton.innerHTML = "<span>Submit</span>";
+    submitButton.setAttribute("onclick", "storeScore()");
+    inputDoneDiv.appendChild(submitButton);
+
+
+}
+
+var storeScore = function() {
+
+    window.location.href = "highscores.html";
+    var obj = {
+        name: document.querySelector("input").value,
+        score: userScore
+    }
+    saveScore.push(obj);
+    localStorage.setItem("highScore", JSON.stringify(saveScore));
+
+
+}
+
+function uploadScore() {
+    var highScores = localStorage.getItem("highScore");
+    if (!highScores) {
+        return false;
+    }
+    highScores = JSON.parse(highScores);
+    for (var i = 0; i < highScores.length; i++) {
+        var temp = {
+            name: highScores[i].name,
+            score: highScores[i].score
+        }
+        saveScore.push(temp);
+    }
+    saveScore.sort(function(a, b) {
+        return b.score - a.score;
+    })
+};
+
+function displayHighScore() {
+    var highScoreList = document.querySelector("#highScoreList");
+
+    for (i = 0; i < saveScore.length; i++) {
+        let scoreList = document.createElement("li");
+        scoreList.className = ("text-start");
+        scoreList.textContent = saveScore[i].name + " " + saveScore[i].score;
+        highScoreList.appendChild(scoreList);
+    }
+};
+
+function clearHighScore() {
+    localStorage.clear();
+    location.reload();
 }
 
 var correctAnswer = function() {
@@ -307,3 +394,4 @@ startBtn.addEventListener("click", startQuiz);
 // answerBtn.addEventListener("click", checkCorrect(ranNumOf(10), mainQuestions[questionNumber].answer))
 //answerBtn.addEventListener("click", try1)
 
+uploadScore()
