@@ -125,10 +125,9 @@ var ranNumOf = function() {
     console.log("math random number" + randomIndex)
     let randomNumber = numbersArray[randomIndex];
     numbersArray.splice(randomIndex, 1);
-    console.log(randomNumber)
+    //console.log(randomNumber)
     console.log(numbersArray)
     return randomNumber;
-
     
 }
 
@@ -255,7 +254,7 @@ var showQuestions = function(questionNumber) {
 }
 
 var checkCorrect = function(questionNumber, questionAnswer) {
-    // console.log(questionNumber)
+     console.log(questionNumber)
     // console.log(questionAnswer)
 
     // remove last question 
@@ -265,17 +264,19 @@ var checkCorrect = function(questionNumber, questionAnswer) {
         correctAnswer();
         userScore = userScore + 1;
         console.log("CORRECT ANSWER")
-        setTimeout(function() {
-            pastQuestion.remove(); 
-        }, 500);
-        setTimeout(function() {
-            //console.log(pastQuestion)
-            showQuestions(ranNumOf());
-        }, 1000);
-    } else {
+        
+    } 
+    else {
         //wrongAnswer();
         timeChange = timeChange - 5;
         console.log("WRONG ANSWER");
+        
+    };
+
+    if (numbersArray.length === 0) {
+        console.log("GAAAAAME OVERRRR")
+        gameOver();
+    } else {
         setTimeout(function() {
             pastQuestion.remove(); 
         }, 500);
@@ -283,7 +284,16 @@ var checkCorrect = function(questionNumber, questionAnswer) {
             //console.log(pastQuestion)
             showQuestions(ranNumOf());
         }, 1000);
-    };
+
+    }
+
+}
+
+var gameOver = function() {
+
+    var toDelete = document.querySelector("#question-view")
+    toDelete.remove();
+
 
 }
 
@@ -292,9 +302,6 @@ var correctAnswer = function() {
     
 }
 
-var try1 = function() {
-    console.log()
-}
 
 startBtn.addEventListener("click", startQuiz);
 // answerBtn.addEventListener("click", checkCorrect(ranNumOf(10), mainQuestions[questionNumber].answer))
