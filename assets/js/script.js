@@ -115,26 +115,18 @@ var timeChange = 100;
 var userScore = 0;
 
 
+let numbersArray = [1,2,3,4,5,6,7,8,9,10]
 
 
+var ranNumOf = function() {
 
-var ranNumOf = function(numberOfQuestions) {
-
-     let numbersArray = [1,2,3,4,5,6,7,8,9,10]
-
-    // function getRandomNumber(min, max) {
-    //         let totalEle = max - min + 1;
-    //         let result = Math.floor(Math.random() * totalEle) + min;
-    //         return result;
-    // }
-    // let randomIndex = getRandomNumber(0, numbersArray.length - 1);
-    // let randomNumber = numbersArray[randomIndex];
-    // numbersArray.splice(randomIndex, 1);
-
-    let randomIndex = Math.floor(Math.random() * numberOfQuestions);
+    console.log("this is ARRAY LENGTH " + numbersArray.length)
+    let randomIndex = Math.floor(Math.random() * numbersArray.length);
+    console.log("math random number" + randomIndex)
     let randomNumber = numbersArray[randomIndex];
     numbersArray.splice(randomIndex, 1);
     console.log(randomNumber)
+    console.log(numbersArray)
     return randomNumber;
 
     
@@ -158,23 +150,12 @@ var startQuiz = function() {
     welcomeEl.remove();
 
     // let value3 = Math.floor(Math.random() * 10);
-    ranNumOf(10)
-    console.log(ranNumOf(10))
-
-    
-
-    
-
-
-    
-    
-
-
-
+    //ranNumOf(10)
+    //console.log(ranNumOf(10))
 
 
     // Call showQuestions Function
-    showQuestions(ranNumOf(10));
+    showQuestions(ranNumOf());
 
 };
 
@@ -204,6 +185,7 @@ var showQuestions = function(questionNumber) {
 
     var selectedAnswers = mainQuestions[questionNumber].choices
     var selectedQuestion = mainQuestions[questionNumber]
+    var trueAnswer = mainQuestions[questionNumber].answer
     
 
     // variable that creates <section> element to display Question
@@ -257,11 +239,12 @@ var showQuestions = function(questionNumber) {
     // }
 
     selectedAnswers.forEach( function(answer) {
-        console.log(answer)
+        //console.log(answer)
         var answerBtnEl = document.createElement("button")
         answerBtnEl.id = "answer-button"
         answerBtnEl.className = "btn btn-primary"
         answerBtnEl.textContent = answer
+        answerBtnEl.setAttribute("onclick", "checkCorrect(" + questionNumber + ", '" + answer + "')" )
         answerBtnEl.setAttribute("correctAnswer", selectedQuestion.answer )
         answerDiv.appendChild(answerBtnEl)
         // answerBtnEl.textContent = selectedAnswers[1]
@@ -272,31 +255,48 @@ var showQuestions = function(questionNumber) {
 }
 
 var checkCorrect = function(questionNumber, questionAnswer) {
+    // console.log(questionNumber)
+    // console.log(questionAnswer)
 
     // remove last question 
-    var pastQuestion = document.querySelector("#question" + questionNumber);
+    var pastQuestion = document.querySelector("#question-view");
 
     if(questionAnswer === mainQuestions[questionNumber].answer) {
         correctAnswer();
         userScore = userScore + 1;
         console.log("CORRECT ANSWER")
+        setTimeout(function() {
+            pastQuestion.remove(); 
+        }, 500);
+        setTimeout(function() {
+            //console.log(pastQuestion)
+            showQuestions(ranNumOf());
+        }, 1000);
     } else {
-        wrongAnswer();
+        //wrongAnswer();
         timeChange = timeChange - 5;
-        console.log("WRONG ANSWER")
+        console.log("WRONG ANSWER");
+        setTimeout(function() {
+            pastQuestion.remove(); 
+        }, 500);
+        setTimeout(function() {
+            //console.log(pastQuestion)
+            showQuestions(ranNumOf());
+        }, 1000);
     };
-
-
-
-
 
 }
 
+var correctAnswer = function() {
+
+    
+}
+
 var try1 = function() {
-    console.log("works!")
+    console.log()
 }
 
 startBtn.addEventListener("click", startQuiz);
 // answerBtn.addEventListener("click", checkCorrect(ranNumOf(10), mainQuestions[questionNumber].answer))
-answerBtn.addEventListener("click", try1)
+//answerBtn.addEventListener("click", try1)
 
