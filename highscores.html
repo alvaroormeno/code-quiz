@@ -7,17 +7,17 @@
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
 
-    <body onload="displayHighScore()">
+    <body onload="showHighScore()">
         <div class="container">
             <div div class="row min-vh-100 m-0 align-items-center" id="high-scores">
-                <div class="col align-space-between text-center align-items-center d-flex flex-column">
+                <div class="col  text-center align-items-center d-flex flex-column">
                     <h2 class="title text-decoration-underline text-center">
                         High Scores
                     </h2>
                     <ol id="highScoreList" class="bg-opacity-75"></ol>
                     <div class="col">
-                        <button class="btn btn-primar m-1" onclick="location.href='index.html'" type="button">Go back</button>
-                        <button onclick="clearHighScore()" class="btn m-1" id="clear-high-scores">Clear high scores</button>
+                        <button class="btn btn-primary m-1" onclick="location.href='index.html'" type="button">Go back</button>
+                        <button onclick="clearHighScore()" class="btn m-1 btn-primary" id="clear-high-scores">Clear high scores</button>
                     </div>
                 </div>
             </div>

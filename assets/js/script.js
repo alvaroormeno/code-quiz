@@ -209,7 +209,7 @@ var checkCorrect = function(questionNumber, questionAnswer) {
     } 
     else {
         wrongAnswer();
-        timeChange = timeChange - 5;
+        timeChange = timeChange - 10;
         console.log("WRONG ANSWER");
         
     };
@@ -303,7 +303,7 @@ function uploadScore() {
     })
 };
 
-function displayHighScore() {
+function showHighScore() {
     var highScoreList = document.querySelector("#highScoreList");
 
     for (i = 0; i < saveScore.length; i++) {
