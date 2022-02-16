@@ -1,107 +1,93 @@
 var mainQuestions = [
     {
-        question: "JavaScript programs can be inserted almost anywhere into an HTML document using the ______ tag.",
-        choices: ["<code>", "<script>","<ins>"],
-        answer: "<script>"
-    },
-
-    {
-        question: "A ______ is a named storage for data.",
-        choices: ["variable",
-        "message",
-        "value",
-        "string"],
-        answer: "<script>"
-    },
-    {
         question: "Variables declared using ______ cannot be reassigned.",
         choices: [
             "var",
             "let",
             "have",
             "const"
-        ],
+],
         answer: "const"
     },
     {
         question: "Which of the following is NOT a data type in JavaScript?",
-        choices: [
-            "number",
-            "string",
-            "character",
-            "boolean"
-        ],
+        choices: ["number","string","character","boolean"],
         answer: "character"
     },
     {
         question: "Which of the following functions will NOT interact with the user?",
-        choices: [
-            "print();",
-            "alert();",
-            "prompt();",
-            "confirm();"
-        ],
+        choices: ["print();","alert();","prompt();","confirm();"],
         answer: "print()",
     },
     {
         question: "Of the following logical operators in JavaScript, which one represents (NOT)?",
-        choices: [
-            "||",
-            "&&",
-            "!",
-            "??"
-        ],
+        choices: [ "||","&&","!","??"],
         answer: "!",
     },
     {
         question: "Normally, a loop exists when the condition becomes falsy. But we can force the exit at any time with the special ______ directive.",
-        choices: [
-            "stop",
-            "end",
-            "alert",
-            "break"
-        ],
+        choices: ["stop","end","alert","break"],
         answer: "break",
     },
     {
         question: "A ______ statement can replace multiple (if) checks.",
-        choices: [
-            "switch",
-            "while",
-            "for",
-            "continue"
-        ],
+        choices: ["switch","while","for","continue"],
         answer: "switch",
     },
     {
         question: "A variable inside a function is only visible inside that function and is known as a ______ .",
-        choices: [
-            "local variable",
-            "outer variable",
-            "global variable",
-            "parameter"
-        ],
+        choices: ["local variable","outer variable","global variable","parameter"],
         answer: "local variable",
     },
     {
         question: "The ______ helps with the process of finding and fixing errors within a script.",
-        choices: [
-            "DOM",
-            "console.log()",
-            "debugger",
-            "parameter"
-        ],
+        choices: ["DOM", "console.log()", "debugger", "parameter"],
         answer: "debugger",
     },
     {
         question: " ______ appends new elements to the end of an array, and returns the new length of an array.",
-        choices: [
-            "concat()",
-            "push()",
-            ".join",
-            "parseInt()"
-        ],
+        choices: [ "concat()", "push()",".join","parseInt()"],
         answer: "push()",
+    },
+    {
+        question: " ______ tag is an extension to HTML that can enclose any number of JavaScript",
+        choices: ["SCRIPT>", "<BODY>", "<HEAD>", "<TITLE>"],
+        answer: "<SCRIPT>",
+    },
+    {
+        question: " Inside which HTML element do we put the JavaScript?",
+        choices: ["<js>", "<scripting>", "<script>", "<javascript>"],
+        answer: "<script>",
+    },
+    {
+        question: "Choose the client-side JavaScript object?",
+        choices: ["Database", "Cursor", "Client", "FileUpLoad"],
+        answer: "FileUpLoad",
+    },
+    {
+        question: "Which of the following is not considered a JavaScript operator?",
+        choices: ["new", "this", "delete", "typeof"],
+        answer: "this",
+    },
+    {
+        question: "Is it possible to nest functions in JavaScript?",
+        choices: ["True", "False"],
+        answer: "True",
+    },
+    {
+        question: "In JavaScript, Window.prompt() method return true or false value ?",
+        choices: ["True", "False"],
+        answer: "False",
+    },
+    {
+        question: "_________ is a wrapped Java array, accessed from within JavaScript code",
+        choices: ["JavaArray", "JavaClass", "JavaObject", "JavaPackage"],
+        answer: "JavaArray",
+    },
+    {
+        question: "Using _______ statement is how you test for a specific condition.",
+        choices: ["Select", "If", "Switch", "For"],
+        answer: "If",
     },
 ]
 
@@ -110,56 +96,34 @@ var answerBtn = document.querySelector("#answer-button")
 var timerEl = document.querySelector("#timeCounter");
 var welcomeEl = document.querySelector("#welcome-view");
 var mainEl = document.querySelector("#mainSection");
+var footerEl = document.querySelector(".footer")
 var correctWrong = document.querySelector("#correctWrong");
 
 var timeChange = 100;
 var userScore = 0;
 var saveScore = [];
 
-
-let numbersArray = [1,2,3,4,5,6,7,8,9,10]
-
-
+// FUNCTION AND ARRAY TO CREATE UNIQUE RANDOM NUMBER FOR QUESTION ID
+let numbersArray = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 var ranNumOf = function() {
 
-    console.log("this is ARRAY LENGTH " + numbersArray.length)
     let randomIndex = Math.floor(Math.random() * numbersArray.length);
-    console.log("math random number" + randomIndex)
     let randomNumber = numbersArray[randomIndex];
     numbersArray.splice(randomIndex, 1);
-    //console.log(randomNumber)
-    console.log(numbersArray)
     return randomNumber;
-    
-}
-
-
-    
-
-
-
-
-
+};
 
 //MAIN QUIZ FUNCTION
 var startQuiz = function() {
 
     //Call startTimer function
     startTimer();
-
-    // Erase Button from hero
+    // Erase welcome section
     welcomeEl.remove();
-
-    // let value3 = Math.floor(Math.random() * 10);
-    //ranNumOf(10)
-    //console.log(ranNumOf(10))
-
-
+    footerEl.remove();
     // Call showQuestions Function
     showQuestions(ranNumOf());
-
 };
-
 
 // START TIME FUNCTION
 var startTimer = function() {
@@ -176,12 +140,7 @@ var startTimer = function() {
             gameOver()
         }
     }, 1000)
-    console.log(timeChange)
-    console.log('hi');
-
 };
-
-
 
 // SHOW QUESTION FUNCTION
 var showQuestions = function(questionNumber) {
@@ -211,13 +170,6 @@ var showQuestions = function(questionNumber) {
     questionDiv.innerHTML = "<h2>" + selectedQuestion.question + "</h2>"; 
     divRowClassQ.appendChild(questionDiv);
 
-
-
-
-
-
-    
-
     // variable that creates <div> element to display answer buttons
     var divRowClassA = document.createElement("div");
     // append answerSection element to <main> element in html
@@ -229,18 +181,8 @@ var showQuestions = function(questionNumber) {
     divRowClassA.appendChild(answerDiv);
     answerDiv.className = "col answers-button d-flex flex-column align-items-center mt-4";
 
-    // for (var i = 0; i < mainQuestions.length; i++) {
-    //     var answerBtnEl = document.createElement("button");
-    //     answerBtnEl.textContent = mainQuestions[questionNumber]
-    //     answerDiv.appendChild.answerBtnEl
 
-    // }
-
-    // for( prop in mainQuestions[questionNumber].choices) {
-    //     var answerBtnEl = document.createElement("button");
-    //     answerBtnEl.textContent = mainQuestions[questionNumber].choices
-    // }
-
+    // create button for every answer option 
     selectedAnswers.forEach( function(answer) {
         //console.log(answer)
         var answerBtnEl = document.createElement("button")
@@ -250,16 +192,11 @@ var showQuestions = function(questionNumber) {
         answerBtnEl.setAttribute("onclick", "checkCorrect(" + questionNumber + ", '" + answer + "')" )
         answerBtnEl.setAttribute("correctAnswer", selectedQuestion.answer )
         answerDiv.appendChild(answerBtnEl)
-        // answerBtnEl.textContent = selectedAnswers[1]
-        
     })
+};
 
-
-}
-
+// FUNCTION TO CHECK SELECTED ANSWER, IT IS CALLED FROM HTML FILE
 var checkCorrect = function(questionNumber, questionAnswer) {
-     console.log(questionNumber)
-    // console.log(questionAnswer)
 
     // remove last question 
     var pastQuestion = document.querySelector("#question-view");
@@ -283,14 +220,13 @@ var checkCorrect = function(questionNumber, questionAnswer) {
     } else {
         setTimeout(function() {
             pastQuestion.remove(); 
-        }, 1000);
+        }, 500);
         setTimeout(function() {
             //console.log(pastQuestion)
             showQuestions(ranNumOf());
-        }, 1500);
+        }, 1000);
 
     }
-
 }
 
 var gameOver = function() {
@@ -336,9 +272,7 @@ var gameOver = function() {
     submitButton.innerHTML = "<span>Submit</span>";
     submitButton.setAttribute("onclick", "storeScore()");
     inputDoneDiv.appendChild(submitButton);
-
-
-}
+};
 
 var storeScore = function() {
 
@@ -349,9 +283,7 @@ var storeScore = function() {
     }
     saveScore.push(obj);
     localStorage.setItem("highScore", JSON.stringify(saveScore));
-
-
-}
+};
 
 function uploadScore() {
     var highScores = localStorage.getItem("highScore");
@@ -407,9 +339,6 @@ var wrongAnswer = function() {
     }, 1100);
 }
 
-
 startBtn.addEventListener("click", startQuiz);
-// answerBtn.addEventListener("click", checkCorrect(ranNumOf(10), mainQuestions[questionNumber].answer))
-//answerBtn.addEventListener("click", try1)
 
 uploadScore()

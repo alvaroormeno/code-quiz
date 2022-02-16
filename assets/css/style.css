@@ -2,8 +2,10 @@
     text-align: end;
 }
 
-/* .answers-button {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-} */
+#highScoreList {
+    background-color: rgb(140, 235, 238);
+    width: 20%;
+    text-align: center;
+    font-size: 22px;
+    border-radius: 10px;
+}
