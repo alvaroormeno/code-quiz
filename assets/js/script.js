@@ -112,10 +112,33 @@ var welcomeEl = document.querySelector("#welcome-view");
 var mainEl = document.querySelector("#mainSection");
 
 var timeChange = 100;
+var userScore = 0;
 
 
 
 
+
+var ranNumOf = function(numberOfQuestions) {
+
+     let numbersArray = [1,2,3,4,5,6,7,8,9,10]
+
+    // function getRandomNumber(min, max) {
+    //         let totalEle = max - min + 1;
+    //         let result = Math.floor(Math.random() * totalEle) + min;
+    //         return result;
+    // }
+    // let randomIndex = getRandomNumber(0, numbersArray.length - 1);
+    // let randomNumber = numbersArray[randomIndex];
+    // numbersArray.splice(randomIndex, 1);
+
+    let randomIndex = Math.floor(Math.random() * numberOfQuestions);
+    let randomNumber = numbersArray[randomIndex];
+    numbersArray.splice(randomIndex, 1);
+    console.log(randomNumber)
+    return randomNumber;
+
+    
+}
 
 
     
@@ -135,17 +158,10 @@ var startQuiz = function() {
     welcomeEl.remove();
 
     // let value3 = Math.floor(Math.random() * 10);
+    ranNumOf(10)
+    console.log(ranNumOf(10))
 
-    let numbersArray = [1,2,3,4,5,6,7,8,9,10]
-
-    function getRandomNumber(min, max) {
-        let totalEle = max - min + 1;
-        let result = Math.floor(Math.random() * totalEle) + min;
-        return result;
-    }
-    let randomIndex = getRandomNumber(0, numbersArray.length - 1);
-    let randomNumber = numbersArray[randomIndex];
-    numbersArray.splice(randomIndex, 1);
+    
 
     
 
@@ -158,7 +174,7 @@ var startQuiz = function() {
 
 
     // Call showQuestions Function
-    showQuestions(randomNumber);
+    showQuestions(ranNumOf(10));
 
 };
 
@@ -181,13 +197,13 @@ var startTimer = function() {
 
 };
 
-var selectedAnswers = mainQuestions[questionNumber].choices
-    var selectedQuestion = mainQuestions[questionNumber]
-    
+
+
 // SHOW QUESTION FUNCTION
 var showQuestions = function(questionNumber) {
 
-    
+    var selectedAnswers = mainQuestions[questionNumber].choices
+    var selectedQuestion = mainQuestions[questionNumber]
     
 
     // variable that creates <section> element to display Question
@@ -201,6 +217,7 @@ var showQuestions = function(questionNumber) {
 
     var divRowClassQ = document.createElement("div");
     divRowClassQ.className = "row"
+    divRowClassQ.id = "question" + questionNumber;
     questionSection.appendChild(divRowClassQ);
 
     var questionDiv = document.createElement('div');
@@ -254,20 +271,32 @@ var showQuestions = function(questionNumber) {
 
 }
 
-var checkCorrect = function(question, correctAnswer) {
+var checkCorrect = function(questionNumber, questionAnswer) {
+
+    // remove last question 
+    var pastQuestion = document.querySelector("#question" + questionNumber);
+
+    if(questionAnswer === mainQuestions[questionNumber].answer) {
+        correctAnswer();
+        userScore = userScore + 1;
+        console.log("CORRECT ANSWER")
+    } else {
+        wrongAnswer();
+        timeChange = timeChange - 5;
+        console.log("WRONG ANSWER")
+    };
+
+
 
 
 
 }
 
-
-
-
-
-
-
-
+var try1 = function() {
+    console.log("works!")
+}
 
 startBtn.addEventListener("click", startQuiz);
-answerBtn.addEventListener("click", checkCorrect())
+// answerBtn.addEventListener("click", checkCorrect(ranNumOf(10), mainQuestions[questionNumber].answer))
+answerBtn.addEventListener("click", try1)
 
